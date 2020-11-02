@@ -1,20 +1,21 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter,Link } from 'react-router-dom'
+import Review from '../../Review'
 import './productList.scss'
 const ProductList = ({history,product}) => {
     console.log(history)
     return (
-        <div className='product-container' onClick={()=> history.push(`{match.params.id}{/product/${product.id}}`)}>
+        <div className='product-container' >
             <div className="content-container">
-            <div className='image-box'>
+            <Link to={`/product/${product.id}`} className='image-box'>
             <div className='image-container' style={{backgroundImage:`url(${product.imageUrl})`}} />
-            </div>
+            </Link>
             <div className='detail-container'>
                 <div className='title'>
     <p>Name: {product.title}</p>
                 </div>
                 <div className='ratings'>
-Rating: {product.rating}
+<Review value={product.rating}/>
                 </div>
             </div>
             </div>
@@ -26,3 +27,5 @@ Rating: {product.rating}
 }
 
 export default withRouter(ProductList)
+// `{match.params.id}{/product/${product.id}}`
+// onClick={()=> history.push(`/product/${product.id}`)}
